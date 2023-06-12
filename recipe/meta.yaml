@@ -39,9 +39,7 @@ outputs:
         # for different nodejs versions in the same CI job
         - ray-dashboard =={{ version }}=*_{{ PKG_BUILDNUM }}
         - {{ pin_subpackage('ray-default', exact=True) }}
-        - {{ pin_subpackage('ray-k8s', exact=True) }}
         - {{ pin_subpackage('ray-data', exact=True) }}
-        - {{ pin_subpackage('ray-rllib', exact=True) }}
         - {{ pin_subpackage('ray-serve', exact=True) }}
         - {{ pin_subpackage('ray-train', exact=True) }}
         - {{ pin_subpackage('ray-tune', exact=True) }}
@@ -60,11 +58,14 @@ outputs:
         - bazel =5.4.0
         - sysroot_linux-64 2.17  # [linux64]
         - patchelf  # [linux]
+        - colorama
         - curl
-        - cython >=0.29.26
+        - cython >=0.29.32
         - make
         - m2-bash  # [win]
+        - psutil
         - python
+        - setproctitle==1.2.2
       host:
         - python
         - pip
@@ -75,7 +76,6 @@ outputs:
         - aiosignal
         - attrs
         - click >=7.0
-        - colorama
         - filelock
         - frozenlist
         # mattip/h-vetinari [2022/11]: unclear problems with conda-forge's 1.49
@@ -88,8 +88,6 @@ outputs:
         - psutil
         - pyyaml
         - requests
-        - setproctitle==1.2.2
-        - virtualenv
 
     test:
       imports:
@@ -152,7 +150,8 @@ outputs:
         - {{ pin_subpackage('ray-core', exact=True) }}
         - numpy >=1.20
         - pandas >=1.3
-        - pyarrow >=6.0.1
+        - pyarrow >=6.0.1  # [not win]
+        - pyarrow >=6.0.1,<7.0.0  # [win]
         - fsspec
     test:
       imports:
@@ -178,6 +177,7 @@ outputs:
         - requests
         - smart_open
         - py-spy >=0.2.0
+        - virtualenv >=20.0.24,<20.21.1
 
     test:
       imports:
@@ -215,7 +215,6 @@ outputs:
         - dm-tree
         - gymnasium ==0.26.3
         - lz4
-        - matplotlib-base !=3.4.3
         - pyyaml
         - scikit-image
         - scipy
@@ -259,8 +258,9 @@ outputs:
         - python
         - {{ pin_subpackage('ray-default', exact=True) }}
         - pandas
+        - pyarrow >=6.0.1  # [not win]
+        - pyarrow >=6.0.1,<7.0.0  # [win]
         - requests
-        - tabulate
         - tensorboardX >=1.9
     test:
       imports:
@@ -276,6 +276,21 @@ outputs:
     test:
       imports:
         - ray.train
+
+  - name: ray-observability
+    requirements:
+      host:
+        - python
+      run:
+        - python
+        - {{ pin_subpackage('ray-default', exact=True) }}
+        - opentelemetry-api
+        - opentelemetry-sdk
+        - opentelemetry-exporter-otlp
+    test:
+      imports:
+        - ray.observability
+
 
 about:
   home: https://github.com/ray-project/ray
@@ -310,7 +325,7 @@ about:
     Ray is a fast and simple framework for building and running
     distributed applications. It is split into ray-core, ray-default,
     ray-dashboard, ray-serve, ray-rllib, ray-k8s, ray-data, ray-tune,
-    ray-train, ray-air and ray-all packages.
+    ray-train, ray-air, ray-observability and ray-all packages.
   doc_url: https://ray.readthedocs.io/
   dev_url: https://github.com/ray-project/ray
 
