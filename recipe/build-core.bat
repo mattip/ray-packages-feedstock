@@ -2,6 +2,10 @@ cd python
 set SKIP_THIRDPARTY_INSTALL=1
 set IS_AUTOMATED_BUILD=1
 set "BAZEL_SH=%BUILD_PREFIX%\Library\usr\bin\bash.exe"
+
+rem Try to force vc2019, vc2022 is not supported by bazel 5.4.0 ?
+set BAZEL_VC=C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC
+
 "%PYTHON%" setup.py install
 rem remember the return code
 set RETCODE=%ERRORLEVEL%
