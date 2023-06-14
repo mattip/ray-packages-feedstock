@@ -3,12 +3,9 @@ set SKIP_THIRDPARTY_INSTALL=1
 set IS_AUTOMATED_BUILD=1
 set "BAZEL_SH=%BUILD_PREFIX%\Library\usr\bin\bash.exe"
 
-rem Try to force vc2019, vc2022 is not supported by bazel 5.4.0 ?
-"c:\Program Files (x86)\Microsoft Visual Studio\Installer"\vswhere -all -property installationPath
-dir "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC"
-dir "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\build"
+echo calling pip install
 
-"%PYTHON%" setup.py install
+"%PYTHON%" -m pip install . -vv
 rem remember the return code
 set RETCODE=%ERRORLEVEL%
 
