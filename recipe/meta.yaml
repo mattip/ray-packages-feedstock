@@ -287,9 +287,6 @@ outputs:
         - opentelemetry-api
         - opentelemetry-sdk
         - opentelemetry-exporter-otlp
-    test:
-      imports:
-        - ray.observability
 
 
 about:
