@@ -4,7 +4,9 @@ set IS_AUTOMATED_BUILD=1
 set "BAZEL_SH=%BUILD_PREFIX%\Library\usr\bin\bash.exe"
 
 rem Try to force vc2019, vc2022 is not supported by bazel 5.4.0 ?
-set BAZEL_VC=C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\VC
+"c:\Program Files (x86)\Microsoft Visual Studio\Installer"\vswhere -all -property installationPath
+dir "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC"
+dir "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\build"
 
 "%PYTHON%" setup.py install
 rem remember the return code
