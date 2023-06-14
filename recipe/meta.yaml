@@ -74,6 +74,7 @@ outputs:
         - aiosignal
         - attrs
         - click >=7.0
+        - colorama
         - filelock
         - frozenlist
         # mattip/h-vetinari [2022/11]: unclear problems with conda-forge's 1.49
@@ -86,6 +87,7 @@ outputs:
         - psutil
         - pyyaml
         - requests
+        - setproctitle==1.2.2
 
     test:
       imports:
