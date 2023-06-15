@@ -3,6 +3,9 @@ set SKIP_THIRDPARTY_INSTALL=1
 set IS_AUTOMATED_BUILD=1
 set "BAZEL_SH=%BUILD_PREFIX%\Library\usr\bin\bash.exe"
 
+set BAZEL_VC=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\build
+set CC_CONFIGURE_DEBUG=1
+
 echo calling pip install
 
 "%PYTHON%" -m pip install . -vv
