@@ -1,10 +1,12 @@
 cd python
+echo on
 set SKIP_THIRDPARTY_INSTALL=1
 set IS_AUTOMATED_BUILD=1
 set "BAZEL_SH=%BUILD_PREFIX%\Library\usr\bin\bash.exe"
 
-set BAZEL_VC=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\build
-set CC_CONFIGURE_DEBUG=1
+set BAZEL_VC=C:\Program Files\Microsoft Visual Studio\2019\Enterprise\VC
+
+dir %BAZEL_VC%
 
 echo calling pip install
 
